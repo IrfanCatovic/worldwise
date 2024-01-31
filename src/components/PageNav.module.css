@@ -7,3 +7,12 @@
   justify-content: space-between;
   list-style: none;
 }
+
+/* .nav :global(.active){
+  background-color: green;
+} kada app sam doda klasu active na neki div i mi zelimo da je uredjujemo dok je aktivna,
+ to moramo ovako da uradimo*/
+
+/* :global(.test) {
+  background-color: red;
+} ako zelimo da napravimo globalnu klasu umesto da je exportujemo */

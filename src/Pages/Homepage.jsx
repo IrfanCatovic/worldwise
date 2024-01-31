@@ -7,7 +7,7 @@ function Homepage() {
     <div>
       <PageNav />
       <AppNav />
-      <h1>HOMEPAGE</h1>
+      <h1 className="test">HOMEPAGE</h1>
       {/* <a href="/pricing">Pricing</a> old way to rout */}
       <Link to="/app">Go to the App</Link>
     </div>
