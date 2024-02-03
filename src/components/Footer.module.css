@@ -1,5 +1,6 @@
 .footer {
   margin-top: auto;
+  display: flex;
 }
 
 .copyright {
