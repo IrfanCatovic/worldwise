@@ -1,4 +1,7 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import styles from "./CountryItem.module.css";
+import CountriesList from "./CountriesList";
 
 function CountryItem({ country }) {
   return (

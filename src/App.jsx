@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 //ovo jeda mi ne bi prijavljivalo gresku nego samo upozorenje
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+
 import Product from "./Pages/Product";
 import Pricing from "./Pages/Pricing";
 import Homepage from "./Pages/Homepage";
@@ -8,7 +10,7 @@ import PageNotFound from "./Pages/PageNotFound";
 import AppLayout from "./Pages/AppLayout";
 import Login from "./Pages/Login";
 import CityList from "./components/CItyList";
-import { useEffect, useState } from "react";
+import CountriesList from "./components/CountriesList";
 
 function App() {
   const [cities, setCities] = useState([]);
@@ -50,7 +52,10 @@ function App() {
               path="cities"
               element={<CityList cities={cities} isLoading={isLoading} />}
             />
-            <Route path="countries" element={<p>Coutries</p>} />
+            <Route
+              path="countries"
+              element={<CountriesList cities={cities} isLoading={isLoading} />}
+            />
             <Route path="form" element={<p>Form</p>} />
             {/* 3 child routes  */}
           </Route>
