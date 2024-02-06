@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { useParams } from "react-router-dom";
 import styles from "./City.module.css";
 
 const formatDate = (date) =>
@@ -10,6 +11,10 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
+  const { id } = useParams();
+
+  //ovde dobijamo u ovo slucaju objekat oblika id:broj
+  //zato sto smo u app kreirali putanju "cities/:id"
   // TEMP DATA
   const currentCity = {
     cityName: "Lisbon",
@@ -20,9 +25,9 @@ function City() {
 
   const { cityName, emoji, date, notes } = currentCity;
 
-  return <h1>CITY</h1>;
+  return <h1>CITY {id}</h1>;
 
-  return;
+  // return;
   //   <div className={styles.city}>
   //     <div className={styles.row}>
   //       <h6>City name</h6>

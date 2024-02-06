@@ -41,7 +41,7 @@ function App() {
         <Routes>
           <Route index element={<Homepage />} />
           {/* Default  */}
-          <Route path="/product" element={<Product />} />
+          <Route path="product" element={<Product />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="app" element={<AppLayout />}>
             <Route
@@ -56,7 +56,7 @@ function App() {
             <Route path="cities/:id" element={<City />} />
             <Route
               path="countries"
-              element={<CountriesList cities={cities} isLoading={isLoading} />}
+              element={<Countri esList cities={cities} isLoading={isLoading} />}
             />
             <Route path="form" element={<p>Form</p>} />
             {/* 3 child routes  */}
