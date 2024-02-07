@@ -56,7 +56,7 @@ function App() {
             <Route path="cities/:id" element={<City />} />
             <Route
               path="countries"
-              element={<Countri esList cities={cities} isLoading={isLoading} />}
+              element={<CountriesList cities={cities} isLoading={isLoading} />}
             />
             <Route path="form" element={<p>Form</p>} />
             {/* 3 child routes  */}

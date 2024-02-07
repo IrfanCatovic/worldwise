@@ -11,10 +11,13 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function CityItem({ city }) {
-  const { cityName, emoji, date, id } = city;
+  const { cityName, emoji, date, id, position } = city;
   return (
     <li>
-      <Link className={styles.cityItem} to={`${id}`}>
+      <Link
+        className={styles.cityItem}
+        to={`${id}?lat=${position.lat}&lng=${position.lng}`}
+      >
         {/* ovaj to={} prop gde sad saljemo podatke gde saljemo odavde u sledecu, u ovom slucaju u city componentu */}
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>

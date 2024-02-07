@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import styles from "./City.module.css";
 
 const formatDate = (date) =>
@@ -12,6 +12,9 @@ const formatDate = (date) =>
 
 function City() {
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const lat = searchParams.get("lat"); //dohvatimo iz URL
+  const lng = searchParams.get("lng"); //dohvati iz URL
 
   //ovde dobijamo u ovo slucaju objekat oblika id:broj
   //zato sto smo u app kreirali putanju "cities/:id"
@@ -25,7 +28,14 @@ function City() {
 
   const { cityName, emoji, date, notes } = currentCity;
 
-  return <h1>CITY {id}</h1>;
+  return (
+    <>
+      <h1>CITY {id}</h1>
+      <p>
+        Position: {lat}, {lng}
+      </p>
+    </>
+  );
 
   // return;
   //   <div className={styles.city}>
