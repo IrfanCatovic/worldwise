@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 //ovo jeda mi ne bi prijavljivalo gresku nego samo upozorenje
 import { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Product from "./Pages/Product";
 import Pricing from "./Pages/Pricing";
@@ -45,10 +45,9 @@ function App() {
           <Route path="product" element={<Product />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="app" element={<AppLayout />}>
-            <Route
-              index
-              element={<CityList cities={cities} isLoading={isLoading} />}
-            />
+            {/* Navigate koristimo kao pocetna odrednica, kada koristimo index napisemo navigate i gde ce da nas povede u koji element  */}
+            {/* replace koristimo jer bez njega strelica za back nece da nas vrati nazad */}
+            <Route index element={<Navigate replace to="cities" />} />
             {/* prvi route pravimo kao default kada otvorimo app  */}
             <Route
               path="cities"
