@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
-//ovo jeda mi ne bi prijavljivalo gresku nego samo upozorenje
-import { useEffect, useState } from "react";
+//ovo je da mi ne bi prijavljivalo gresku nego samo upozorenje
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Product from "./Pages/Product";
@@ -13,31 +12,11 @@ import CityList from "./components/CItyList";
 import CountriesList from "./components/CountriesList";
 import City from "./components/City";
 import Form from "./components/Form";
+import { CitiesProvider } from "./contexts/CitiesContext";
 
 function App() {
-  const [cities, setCities] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const BASE_URL = "http://localhost:9000";
-
-  useEffect(function () {
-    async function fetchCities() {
-      try {
-        setIsLoading(true);
-        const res = await fetch(`${BASE_URL}/cities`);
-        const data = await res.json();
-        setCities(data);
-      } catch {
-        alert("There was an error loading data...");
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchCities();
-  }, []);
-
   return (
-    <div>
+    <CitiesProvider>
       <BrowserRouter>
         <Routes>
           <Route index element={<Homepage />} />
@@ -49,15 +28,9 @@ function App() {
             {/* replace koristimo jer bez njega strelica za back nece da nas vrati nazad */}
             <Route index element={<Navigate replace to="cities" />} />
             {/* prvi route pravimo kao default kada otvorimo app  */}
-            <Route
-              path="cities"
-              element={<CityList cities={cities} isLoading={isLoading} />}
-            />
+            <Route path="cities" element={<CityList />} />
             <Route path="cities/:id" element={<City />} />
-            <Route
-              path="countries"
-              element={<CountriesList cities={cities} isLoading={isLoading} />}
-            />
+            <Route path="countries" element={<CountriesList />} />
             <Route path="form" element={<Form />} />
             {/* 3 child routes  */}
           </Route>
@@ -65,7 +38,7 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </CitiesProvider>
   );
 }
 
