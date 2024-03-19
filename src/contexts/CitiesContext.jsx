@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const CitiesContext = createContext();
 
@@ -31,4 +31,14 @@ function CitiesProvider({ children }) {
     </CitiesContext.Provider>
   );
 }
-export { CitiesProvider };
+
+function useCitis() {
+  const context = useContext(CitiesContext);
+  //pass in our context from we witch want to read the data
+  //we have to tell him bcs there can be multiple complex
+  if (context === undefined)
+    throw new Error("Cities Context was used outside the cities provider");
+  return context;
+}
+
+export { CitiesProvider, useCitis };
