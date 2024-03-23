@@ -12,6 +12,7 @@ import BackButton from "./BackButton";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import Message from "../components/Message";
 import Spinner from "../components/Spinner";
+import { useCitis } from "../contexts/CitiesContext";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function convertToEmoji(countryCode) {
@@ -25,6 +26,8 @@ export function convertToEmoji(countryCode) {
 function Form() {
   const [isLoadingGeocoding, setLoadingGeocoding] = useState(false);
   const [lat, lng] = useUrlPosition();
+  const { createCity } = useCitis();
+
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
   const [date, setDate] = useState(new Date());
@@ -65,6 +68,18 @@ function Form() {
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (!cityName || !date) return;
+
+    const newCity = {
+      cityName,
+      country,
+      emoji,
+      date,
+      notes,
+      position: { lat, lng },
+    };
+    createCity(newCity);
   }
 
   if (isLoadingGeocoding) return <Spinner />;
