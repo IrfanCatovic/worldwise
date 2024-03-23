@@ -80,6 +80,9 @@ function Form() {
       notes,
       position: { lat, lng },
     };
+
+    //await radimo ovde da nas ne bi insta vratilo na prethodnu stranu sa nnavigate
+    //nego cekamo kada kreira novi grad i upise sve u API onda se vrati kod nas i vraca nas na prethodnu stranu
     await createCity(newCity);
     navigate("/app/cities");
   }
