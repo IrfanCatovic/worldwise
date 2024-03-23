@@ -13,6 +13,8 @@ import {
 import { useEffect, useState } from "react";
 import { map } from "leaflet";
 import { useCitis } from "../contexts/CitiesContext";
+import { useGeolocation } from "../hooks/useGeolocation";
+import Button from "../components/Button";
 
 function Map() {
   const navigate = useNavigate();
@@ -20,6 +22,12 @@ function Map() {
   const { cities } = useCitis();
   //return function called navigate and then we can use this function to move to any url
   const [searchParams] = useSearchParams();
+  const {
+    isLoading: isLoadingPosition,
+    position: geolocationPosition,
+    getPosition,
+  } = useGeolocation();
+
   const mapLat = searchParams.get("lat"); //dohvatimo iz URL
   const mapLng = searchParams.get("lng"); //dohvati iz URL
 
@@ -32,9 +40,26 @@ function Map() {
     [mapLat, mapLng]
   );
 
+  useEffect(
+    function () {
+      if (geolocationPosition)
+        //ovo se vezemo na custom hook koji smo mi napravili
+        //kada pritisnemo dugme Use Your location(getPosition) onda preko funkcija u hook dobijamo nasu lokaciju
+        //kada se promeni lokacija u hook ono trigeruje ovaj useEffect
+        //kada trigeruje useEffect onda menjamo nase MapPosition i onda centar bude novi mapPosition
+        setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
+    },
+    [geolocationPosition]
+  );
+
   const [mapPosition, setMapPosition] = useState([40, 0]);
   return (
     <div className={styles.mapContainer}>
+      {!geolocationPosition && (
+        <Button type="position" onClick={getPosition}>
+          {isLoadingPosition ? "Loading..." : "Use your position"}
+        </Button>
+      )}
       <MapContainer
         center={mapPosition}
         zoom={13}
