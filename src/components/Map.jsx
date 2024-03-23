@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./Map.module.css";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import { useState } from "react";
 import { map } from "leaflet";
 import { useCitis } from "../contexts/CitiesContext";
@@ -12,14 +13,15 @@ function Map() {
   const { cities } = useCitis();
   //return function called navigate and then we can use this function to move to any url
   const [searchParams, setSearchParams] = useSearchParams();
-  const lat = searchParams.get("lat"); //dohvatimo iz URL
-  const lng = searchParams.get("lng"); //dohvati iz URL
+  const mapLat = searchParams.get("lat"); //dohvatimo iz URL
+  const mapLng = searchParams.get("lng"); //dohvati iz URL
 
   const [mapPosition, setMapPosition] = useState([40, 0]);
   return (
     <div className={styles.mapContainer}>
       <MapContainer
         center={mapPosition}
+        // center={[mapLat, mapLng]}
         zoom={13}
         scrollWheelZoom={true}
         className={styles.map}
@@ -35,13 +37,23 @@ function Map() {
             key={city.id}
           >
             <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
+              <span>{city.emoji}</span> <span>{city.cityName}</span>
             </Popup>
           </Marker>
         ))}
+        Ovo radimo jer leaflet funkcionise preko komponenti i mi smo napravili
+        nasu ali koristimo njene funkcije, tj biblioteke leaftlet
+        <ChangeCenter position={[mapLat || 40, mapLng || 0]} />
       </MapContainer>
     </div>
   );
+}
+
+function ChangeCenter({ position }) {
+  //get current instance that is currently be displayed
+  const map = useMap();
+  map.setView(position);
+  return null;
 }
 
 export default Map;
