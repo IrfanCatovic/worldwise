@@ -3,7 +3,7 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./Map.module.css";
 import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { map } from "leaflet";
 import { useCitis } from "../contexts/CitiesContext";
 
@@ -12,16 +12,24 @@ function Map() {
 
   const { cities } = useCitis();
   //return function called navigate and then we can use this function to move to any url
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const mapLat = searchParams.get("lat"); //dohvatimo iz URL
   const mapLng = searchParams.get("lng"); //dohvati iz URL
+
+  useEffect(
+    function () {
+      //kada pritisnemo na grad i vratimo se nazad mapu ce da vrati na pocetnu vrednost
+      //kako bi zapamtilo vrednosti iz URL mi ih sad cuvamo u mapu do sledeceg klika
+      if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
+    },
+    [mapLat, mapLng]
+  );
 
   const [mapPosition, setMapPosition] = useState([40, 0]);
   return (
     <div className={styles.mapContainer}>
       <MapContainer
         center={mapPosition}
-        // center={[mapLat, mapLng]}
         zoom={13}
         scrollWheelZoom={true}
         className={styles.map}
@@ -43,7 +51,7 @@ function Map() {
         ))}
         Ovo radimo jer leaflet funkcionise preko komponenti i mi smo napravili
         nasu ali koristimo njene funkcije, tj biblioteke leaftlet
-        <ChangeCenter position={[mapLat || 40, mapLng || 0]} />
+        <ChangeCenter position={mapPosition} />
       </MapContainer>
     </div>
   );
