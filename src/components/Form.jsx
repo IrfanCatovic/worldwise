@@ -2,6 +2,8 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
 import { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import styles from "./Form.module.css";
 import Button from "./Button";
@@ -9,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import BackButton from "./BackButton";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import Message from "../components/Message";
+import Spinner from "../components/Spinner";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function convertToEmoji(countryCode) {
@@ -33,6 +36,7 @@ function Form() {
 
   useEffect(
     function () {
+      if (!lat && !lng) return;
       async function fetchCityData() {
         try {
           setLoadingGeocoding(true);
@@ -59,10 +63,18 @@ function Form() {
     [lat, lng]
   );
 
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  if (isLoadingGeocoding) return <Spinner />;
   if (geocodingError) return <Message message={geocodingError} />;
 
+  if (!lat && !lng)
+    return <Message message="Start by clicking somewhere on the map. 🚩" />;
+
   return (
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input
@@ -75,10 +87,17 @@ function Form() {
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
+        {/* <input
           id="date"
           onChange={(e) => setDate(e.target.value)}
           value={date}
+        /> */}
+
+        <DatePicker
+          id="date"
+          onChange={(date) => setDate(date)}
+          selected={date}
+          dateFormat={"MM/dd/yyyy"}
         />
       </div>
 
