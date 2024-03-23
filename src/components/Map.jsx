@@ -15,21 +15,23 @@ import { map } from "leaflet";
 import { useCitis } from "../contexts/CitiesContext";
 import { useGeolocation } from "../hooks/useGeolocation";
 import Button from "../components/Button";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 
 function Map() {
   const navigate = useNavigate();
 
   const { cities } = useCitis();
   //return function called navigate and then we can use this function to move to any url
-  const [searchParams] = useSearchParams();
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
     getPosition,
   } = useGeolocation();
-
-  const mapLat = searchParams.get("lat"); //dohvatimo iz URL
-  const mapLng = searchParams.get("lng"); //dohvati iz URL
+  const [mapLat, mapLng] = useUrlPosition();
+  //premestili ga u customHook ali prvo je bio ovde
+  // const [searchParams] = useSearchParams();
+  // const mapLat = searchParams.get("lat"); //dohvatimo iz URL
+  // const mapLng = searchParams.get("lng"); //dohvati iz URL
 
   useEffect(
     function () {
