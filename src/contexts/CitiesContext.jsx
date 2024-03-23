@@ -40,6 +40,7 @@ function CitiesProvider({ children }) {
     }
   }
 
+  //ADDING NEW CITY TO FAKE API AND LIST
   async function createCity(newCity) {
     try {
       setIsLoading(true);
