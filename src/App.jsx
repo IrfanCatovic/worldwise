@@ -14,6 +14,7 @@ import City from "./components/City";
 import Form from "./components/Form";
 import { CitiesProvider } from "./contexts/CitiesContext";
 import { AuthProvider } from "./contexts/FakeAuthContext";
+import ProtectedRoute from "./Pages/ProtectedRoute";
 
 function App() {
   return (
@@ -25,7 +26,17 @@ function App() {
             {/* Default  */}
             <Route path="product" element={<Product />} />
             <Route path="pricing" element={<Pricing />} />
-            <Route path="app" element={<AppLayout />}>
+            <Route
+              path="app"
+              element={
+                //ovo radimo da bismo sprecili da ljudi udju na neke rute u aplikaciji kada nisu logovani
+                //ovo je vid zastite
+                //radimo oko applayout jer je to ustvari nas app gde sve funkcionise
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
               {/* Navigate koristimo kao pocetna odrednica, kada koristimo index napisemo navigate i gde ce da nas povede u koji element  */}
               {/* replace koristimo jer bez njega strelica za back nece da nas vrati nazad */}
               <Route index element={<Navigate replace to="cities" />} />
