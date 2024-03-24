@@ -35,6 +35,7 @@ function reducer(state, action) {
         ...state,
         isLoading: false,
         cities: [...state.cities, action.payload],
+        currentCity: action.payload,
       };
 
     case "city/deleted":
@@ -42,6 +43,7 @@ function reducer(state, action) {
         ...state,
         isLoading: false,
         cities: state.cities.filter((city) => city.id !== action.payload),
+        currentCity: {},
       };
 
     case "rejected":
@@ -87,6 +89,8 @@ function CitiesProvider({ children }) {
 
   //da fetch podatke sa city
   async function getCity(id) {
+    if (Number(id) === currentCity.id) return;
+
     dispatch({ type: "loading" });
     try {
       const res = await fetch(`${BASE_URL}/cities/${id}`);
@@ -112,7 +116,6 @@ function CitiesProvider({ children }) {
         },
       });
       const data = await res.json();
-
       dispatch({ type: "city/created", payload: data });
     } catch {
       dispatch({
@@ -122,6 +125,7 @@ function CitiesProvider({ children }) {
     }
   }
 
+  //delete city
   async function deleteCity(id) {
     dispatch({ type: "loading" });
     try {
