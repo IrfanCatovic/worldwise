@@ -13,32 +13,35 @@ import CountriesList from "./components/CountriesList";
 import City from "./components/City";
 import Form from "./components/Form";
 import { CitiesProvider } from "./contexts/CitiesContext";
+import { AuthProvider } from "./contexts/FakeAuthContext";
 
 function App() {
   return (
-    <CitiesProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route index element={<Homepage />} />
-          {/* Default  */}
-          <Route path="product" element={<Product />} />
-          <Route path="pricing" element={<Pricing />} />
-          <Route path="app" element={<AppLayout />}>
-            {/* Navigate koristimo kao pocetna odrednica, kada koristimo index napisemo navigate i gde ce da nas povede u koji element  */}
-            {/* replace koristimo jer bez njega strelica za back nece da nas vrati nazad */}
-            <Route index element={<Navigate replace to="cities" />} />
-            {/* prvi route pravimo kao default kada otvorimo app  */}
-            <Route path="cities" element={<CityList />} />
-            <Route path="cities/:id" element={<City />} />
-            <Route path="countries" element={<CountriesList />} />
-            <Route path="form" element={<Form />} />
-            {/* 3 child routes  */}
-          </Route>
-          <Route path="login" element={<Login />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </CitiesProvider>
+    <AuthProvider>
+      <CitiesProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Homepage />} />
+            {/* Default  */}
+            <Route path="product" element={<Product />} />
+            <Route path="pricing" element={<Pricing />} />
+            <Route path="app" element={<AppLayout />}>
+              {/* Navigate koristimo kao pocetna odrednica, kada koristimo index napisemo navigate i gde ce da nas povede u koji element  */}
+              {/* replace koristimo jer bez njega strelica za back nece da nas vrati nazad */}
+              <Route index element={<Navigate replace to="cities" />} />
+              {/* prvi route pravimo kao default kada otvorimo app  */}
+              <Route path="cities" element={<CityList />} />
+              <Route path="cities/:id" element={<City />} />
+              <Route path="countries" element={<CountriesList />} />
+              <Route path="form" element={<Form />} />
+              {/* 3 child routes  */}
+            </Route>
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </CitiesProvider>
+    </AuthProvider>
   );
 }
 
