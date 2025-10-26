@@ -1,6 +1,7 @@
 // Uses the same styles as Product
 import styles from "./Product.module.css";
 import PageNav from "../components/PageNav";
+import image from "../assets/img-2.jpg";
 
 export default function Product() {
   return (
@@ -19,7 +20,7 @@ export default function Product() {
             voluptatem iste.
           </p>
         </div>
-        <img src="img-2.jpg" alt="overview of a large city with skyscrapers" />
+        <img src={image} alt="overview of a large city with skyscrapers" />
       </section>
     </main>
   );
