@@ -19,6 +19,7 @@ import { useUrlPosition } from "../hooks/useUrlPosition";
 
 function Map() {
   const navigate = useNavigate();
+  //dohvatamo gradove iz contexta
 
   const { cities } = useCitis();
   //return function called navigate and then we can use this function to move to any url
@@ -27,6 +28,9 @@ function Map() {
     position: geolocationPosition,
     getPosition,
   } = useGeolocation();
+  //customhook koji smo napravili za dohvatanje pozicije iz urla
+  //vraca nam niz sa lat i lng
+  //desktrujtujemo ga odmag u dve promenljive
   const [mapLat, mapLng] = useUrlPosition();
   //premestili ga u customHook ali prvo je bio ovde
   // const [searchParams] = useSearchParams();
@@ -41,6 +45,9 @@ function Map() {
     },
     [mapLat, mapLng]
   );
+  //ovo useEffect se vezuje za custom hook useUrlPosition
+  //kada se promeni lat i lng u url onda se trigeruje ovaj useEffect
+  //i menja se mapPosition u nove vrednosti iz url-a
 
   useEffect(
     function () {
@@ -72,6 +79,7 @@ function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
+        {/*mapiramo sve gradove iz contexta na mapu*/}
         {cities.map((city) => (
           // eslint-disable-next-line react/jsx-key
           <Marker
