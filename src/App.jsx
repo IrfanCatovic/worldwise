@@ -39,6 +39,7 @@ function App() {
               {/* Default  */}
               <Route path="product" element={<Product />} />
               <Route path="pricing" element={<Pricing />} />
+
               <Route
                 path="app"
                 element={
@@ -53,10 +54,14 @@ function App() {
                 {/* Navigate koristimo kao pocetna odrednica, kada koristimo index napisemo navigate i gde ce da nas povede u koji element  */}
                 {/* replace koristimo jer bez njega strelica za back nece da nas vrati nazad */}
                 <Route index element={<Navigate replace to="cities" />} />
+
                 {/* prvi route pravimo kao default kada otvorimo app  */}
                 <Route path="cities" element={<CityList />} />
                 <Route path="cities/:id" element={<City />} />
+                {/*dynamic route za city */}
                 <Route path="countries" element={<CountriesList />} />
+                {/* dodali smo rutu za countries  */}
+
                 <Route path="form" element={<Form />} />
                 {/* 3 child routes  */}
               </Route>

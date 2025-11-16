@@ -13,7 +13,9 @@ const formatDate = (date) =>
 
 function CityItem({ city }) {
   const { currentCity, deleteCity } = useCitis();
+
   const { cityName, emoji, date, id, position } = city;
+  //destrukturisemo city objekat koji dobijamo kao prop iz citylist komponente
 
   function handleClick(e) {
     e.preventDefault();
@@ -27,6 +29,7 @@ function CityItem({ city }) {
         }`}
         to={`${id}?lat=${position.lat}&lng=${position.lng}`}
       >
+        {/* ovaj link nas vodi na rutu cities/:id */}
         {/* ovaj to={} prop gde sad saljemo podatke gde saljemo odavde u sledecu, u ovom slucaju u city componentu */}
         <span className={styles.emoji}>{emoji}</span>
         <h3 className={styles.name}>{cityName}</h3>
