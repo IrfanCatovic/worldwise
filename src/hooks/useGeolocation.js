@@ -11,12 +11,14 @@ export function useGeolocation(defaultPosition = null) {
       return setError("Your browser does not support geolocation");
 
     setIsLoading(true);
+
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setPosition({
           lat: pos.coords.latitude,
           lng: pos.coords.longitude,
         });
+
         setIsLoading(false);
       },
       (error) => {

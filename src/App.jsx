@@ -65,6 +65,7 @@ function App() {
                 <Route path="form" element={<Form />} />
                 {/* 3 child routes  */}
               </Route>
+
               <Route path="login" element={<Login />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
