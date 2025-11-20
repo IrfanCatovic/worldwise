@@ -16,6 +16,8 @@ const formatDate = (date) =>
 
 function City() {
   const { id } = useParams();
+  //ovaj id je dopseo ovde iz rute koju smo definisali u app.jsx, a zapisan je kada smo kliknuli na neki grad sa liste
+  //tako sto smo u cityItem komponenti definisali link ka ruti cities/:id
 
   const { getCity, currentCity, isLoading } = useCitis();
 
@@ -29,25 +31,6 @@ function City() {
   // const [searchParams, setSearchParams] = useSearchParams();
   // const lat = searchParams.get("lat"); //dohvatimo iz URL
   // const lng = searchParams.get("lng"); //dohvati iz URL
-
-  //ovde dobijamo u ovo slucaju objekat oblika id:broj
-  //zato sto smo u app kreirali putanju "cities/:id"
-  // TEMP DATA
-  // const currentCity = {
-  //   cityName: "Lisbon",
-  //   emoji: "🇵🇹",
-  //   date: "2027-10-31T15:59:59.138Z",
-  //   notes: "My favorite city so far!",
-  // };
-
-  // return (
-  //   <>
-  //     <h1>CITY {id}</h1>
-  //     <p>
-  //       Position: {lat}, {lng}
-  //     </p>
-  //   </>
-  // );
 
   const { cityName, emoji, date, notes } = currentCity;
 

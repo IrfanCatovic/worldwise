@@ -22,7 +22,7 @@ function Map() {
   //dohvatamo gradove iz contexta
 
   const { cities } = useCitis();
-  //return function called navigate and then we can use this function to move to any url
+  
   const {
     isLoading: isLoadingPosition,
     position: geolocationPosition,
@@ -37,8 +37,7 @@ function Map() {
 
   useEffect(
     function () {
-      //kada pritisnemo na grad i vratimo se nazad mapu ce da vrati na pocetnu vrednost
-      //kako bi zapamtilo vrednosti iz URL mi ih sad cuvamo u mapu do sledeceg klika
+      
       if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
     },
     [mapLat, mapLng]
@@ -76,6 +75,7 @@ function Map() {
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
+          //title layer je kao pozadina mape
         />
         {/*mapiramo sve gradove iz contexta na mapu*/}
         {cities.map((city) => (
