@@ -32,10 +32,8 @@ function Map() {
   //vraca nam niz sa lat i lng
   //desktrujtujemo ga odmag u dve promenljive
   const [mapLat, mapLng] = useUrlPosition();
-  //premestili ga u customHook ali prvo je bio ovde
-  // const [searchParams] = useSearchParams();
-  // const mapLat = searchParams.get("lat"); //dohvatimo iz URL
-  // const mapLng = searchParams.get("lng"); //dohvati iz URL
+  //ovo su lat i lng iz urla, ako ih ima
+  //map dobijamo iz useState dole
 
   useEffect(
     function () {

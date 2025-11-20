@@ -12,7 +12,7 @@ function Sidebar() {
         <AppNav />
 
         <Outlet />
-        {/* za nested routes */}
+        {/*outlet koristimo da bismo prikazali sadrzaj koji je vezan za sidebar */}
       </div>
 
       <Footer />

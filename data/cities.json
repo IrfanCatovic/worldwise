@@ -23,6 +23,54 @@
         "lat": "40.00594645441728",
         "lng": "-0.0092480053710986"
       }
+    },
+    {
+      "id": "57a1",
+      "cityName": "Vushtrri",
+      "country": "Republic of Kosovo",
+      "emoji": "🇽🇰",
+      "date": "2025-11-18T17:41:48.438Z",
+      "notes": "",
+      "position": {
+        "lat": "42.77826738996885",
+        "lng": "20.952301025390625"
+      }
+    },
+    {
+      "id": "1708",
+      "cityName": "Komuna e Gjegjanit",
+      "country": "Albania",
+      "emoji": "🇦🇱",
+      "date": "2025-11-18T17:41:56.602Z",
+      "notes": "",
+      "position": {
+        "lat": "41.97991089691236",
+        "lng": "19.967651367187504"
+      }
+    },
+    {
+      "id": "94f3",
+      "cityName": "Niksic",
+      "country": "Montenegro",
+      "emoji": "🇲🇪",
+      "date": "2025-11-18T17:41:59.204Z",
+      "notes": "",
+      "position": {
+        "lat": "42.819580715795915",
+        "lng": "18.901977539062504"
+      }
+    },
+    {
+      "id": "f863",
+      "cityName": "Tutin",
+      "country": "Serbia",
+      "emoji": "🇷🇸",
+      "date": "2025-11-19T16:19:23.305Z",
+      "notes": "",
+      "position": {
+        "lat": "42.99221783761458",
+        "lng": "20.255012512207035"
+      }
     }
   ]
 }
