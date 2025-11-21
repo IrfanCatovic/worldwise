@@ -54,8 +54,9 @@ function Form() {
               "that doesn't seem to be a city. Click somewhere else. 🤔"
             );
           setCityName(data.cityName || data.locality || "");
+          //this || is for the places where cityName is empty like in small towns 
           setCountry(data.countryName);
-          setEmoji(convertToEmoji(data.countryCode));
+          setEmoji(convertToEmoji(data.countryCode)); 
         } catch (err) {
           setGeocodingError(err.message);
         } finally {
@@ -110,11 +111,7 @@ function Form() {
 
       <div className={styles.row}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        {/* <input
-          id="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
-        /> */}
+        
 
         <DatePicker
           id="date"
