@@ -28,6 +28,7 @@ function Map() {
     position: geolocationPosition,
     getPosition,
   } = useGeolocation();
+  
   //customhook koji smo napravili za dohvatanje pozicije iz urla
   //vraca nam niz sa lat i lng
   //desktrujtujemo ga odmag u dve promenljive
@@ -49,10 +50,8 @@ function Map() {
   useEffect(
     function () {
       if (geolocationPosition)
-        //ovo se vezemo na custom hook koji smo mi napravili
-        //kada pritisnemo dugme Use Your location(getPosition) onda preko funkcija u hook dobijamo nasu lokaciju
-        //kada se promeni lokacija u hook ono trigeruje ovaj useEffect
-        //kada trigeruje useEffect onda menjamo nase MapPosition i onda centar bude novi mapPosition
+        //ako dobijemo poziciju iz geolocation hook-a, onda postavimo mapPosition na tu poziciju
+        //setujemo mapPosition na poziciju dobijenu iz geolocation hook-a
         setMapPosition([geolocationPosition.lat, geolocationPosition.lng]);
     },
     [geolocationPosition]
@@ -68,7 +67,7 @@ function Map() {
       )}
       <MapContainer
         center={mapPosition}
-        zoom={13}
+        zoom={10}
         scrollWheelZoom={true}
         className={styles.map}
       >
@@ -89,8 +88,8 @@ function Map() {
             </Popup>
           </Marker>
         ))}
-        Ovo radimo jer leaflet funkcionise preko komponenti i mi smo napravili
-        nasu ali koristimo njene funkcije, tj biblioteke leaftlet
+        {/* Ovo radimo jer leaflet funkcionise preko komponenti i mi smo napravili
+        nasu ali koristimo njene funkcije, tj biblioteke leaftlet */}
         <ChangeCenter position={mapPosition} />
         <DetectClick />
       </MapContainer>
@@ -98,6 +97,7 @@ function Map() {
   );
 }
 
+//this is custom component that changes the center of the map
 function ChangeCenter({ position }) {
   //get current instance that is currently be displayed
   const map = useMap();
