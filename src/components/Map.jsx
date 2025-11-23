@@ -18,9 +18,6 @@ import Button from "../components/Button";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 
 function Map() {
-  const navigate = useNavigate();
-  //dohvatamo gradove iz contexta
-
   const { cities } = useCitis();
   
   const {

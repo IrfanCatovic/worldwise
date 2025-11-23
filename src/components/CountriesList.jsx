@@ -23,11 +23,8 @@ function CountriesList() {
       return [...arr, { country: cur.country, emoji: cur.emoji }];
     else return arr;
   }, []);
-  //acumulator i current value, starteing is empty array
-  //radi se o gradovima, umesto cur mozemo da napisemo city
-
-  //proveravamo da li zemlja NIJE u postojecem arrayu, ako nije onda se kreira novi array
-  //od postojeceg kopiravmo sve u novo i dodajemo novu zemlju
+  //iz cities pravimo niz countries bez duplikata, a to tacno radi tako sto koristi reduce, a ona prolazi kroz ceo niz i pravi novi niz sa samo jedinstevnim zemljama 
+  //if (!arr.map((el) => el.country).includes(cur.country)) ovo ustvari znaci da ako u nasem novom nizu arr ne postoji vec ta zemlja iz cities niza onda je dodajemo u arr
   return (
     <div>
       <ul className={styles.countryList}>

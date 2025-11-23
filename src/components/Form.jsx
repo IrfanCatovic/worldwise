@@ -48,11 +48,13 @@ function Form() {
           const res = await fetch(
             `${BASE_URL}?latitude=${lat}&longitude=${lng}`
           );
+
           const data = await res.json();
           if (!data.countryCode)
             throw new Error(
               "that doesn't seem to be a city. Click somewhere else. 🤔"
             );
+
           setCityName(data.cityName || data.locality || "");
           //this || is for the places where cityName is empty like in small towns 
           setCountry(data.countryName);
@@ -70,9 +72,7 @@ function Form() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     if (!cityName || !date) return;
-
     const newCity = {
       cityName,
       country,
@@ -81,9 +81,6 @@ function Form() {
       notes,
       position: { lat, lng },
     };
-
-    //await radimo ovde da nas ne bi insta vratilo na prethodnu stranu sa nnavigate
-    //nego cekamo kada kreira novi grad i upise sve u API onda se vrati kod nas i vraca nas na prethodnu stranu
     await createCity(newCity);
     navigate("/app/cities");
   }
