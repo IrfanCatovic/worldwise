@@ -81,8 +81,11 @@ function Form() {
       notes,
       position: { lat, lng },
     };
+    //kreiran novi objekat newCity sa svim potrebnim podacima
+    //await jer je createCity async funkcija
     await createCity(newCity);
     navigate("/app/cities");
+    //nakon sto dodamo novi grad, vracamo se na listu gradova
   }
 
   if (isLoadingGeocoding) return <Spinner />;
@@ -114,7 +117,7 @@ function Form() {
           id="date"
           onChange={(date) => setDate(date)}
           selected={date}
-          dateFormat={"MM/dd/yyyy"}
+          dateFormat={"dd/MM/yyyy"}
         />
       </div>
 
