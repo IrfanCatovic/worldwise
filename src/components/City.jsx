@@ -25,7 +25,7 @@ function City() {
     function () {
       getCity(id);
     },
-    [id, getCity]
+    [id, getCity] 
   );
 
   // const [searchParams, setSearchParams] = useSearchParams();

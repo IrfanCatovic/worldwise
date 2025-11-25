@@ -87,7 +87,7 @@ function CitiesProvider({ children }) {
         dispatch({
           type: "rejected",
           payload: "There was an error loading cities...",
-        });
+        }); 
       }
     }
     fetchCities();
@@ -95,7 +95,7 @@ function CitiesProvider({ children }) {
 
   
   //da fetch podatke sa city
-  const getCity = useCallback(
+  const getCity = useCallback( 
     async function getCity(id) {
       if (Number(id) === currentCity.id) return;
 

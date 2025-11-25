@@ -27,6 +27,8 @@ const Pricing = lazy(() => import("./Pages/Pricing"));
 const Login = lazy(() => import("./Pages/Login"));
 const AppLayout = lazy(() => import("./Pages/AppLayout"));
 const PageNotFound = lazy(() => import("./Pages/PageNotFound"));
+//lazy loading znaci da se ovi delovi koda ucitavaju samo kada su potrebni, a ne odmah na pocetku
+
 
 function App() {
   return (
